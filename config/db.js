@@ -9,11 +9,9 @@ export const dbConnect = async () => {
     console.log('Attempting to connect to MongoDB with URL:', mongoUri);
 
     await mongoose.connect(mongoUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       serverSelectionTimeoutMS: 10000, // 10 seconds timeout
-      heartBeatFrequencyMS: 10000, // Check server every 10 seconds
-      autoIndex: true, // Optional: Automatically create indexes
+      heartbeatFrequencyMS: 10000, // Check server every 10 seconds
+      autoIndex: true, // Automatically create indexes
     });
 
     console.log('MongoDB connected successfully to:', mongoUri);
@@ -24,6 +22,7 @@ export const dbConnect = async () => {
       code: error.code,
       reason: error.reason,
       stack: error.stack,
+      ip: error.address, // Might show the IP being attempted
     });
     process.exit(1);
   }

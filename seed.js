@@ -6,7 +6,7 @@ import { dbConnect } from './config/db.js';
 async function seedDatabase() {
   await dbConnect();
 
-  const hrPassword = await bcrypt.hash('admin123', 10);
+  const hrPassword = await bcrypt.hash(process.env.PASSWORD, 10);
 
   await Employee.deleteMany({});
   await Employee.create({
